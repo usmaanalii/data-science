@@ -70,3 +70,20 @@ existing_df.loc['1992':'2005']
 
 # Combined to perform series indexing by column
 existing_df.loc[['1992', '1998', '2005'], ['Spain', 'United Kingdom']]
+
+# 3. DATA SELECTION
+#    How to select data from dataframes based on their values via logical
+#    expressions
+
+# logical operators
+existing_df > 10
+existing_df['United Kingdom'] > 10
+
+# You can use the result of the previous expressions to index vectors
+# with .iloc or []
+existing_df.Spain[existing_df['United Kingdom'] > 10]
+
+existing_df[existing_df > 10]  # False values will return NaN
+
+# NOTE: Use of where() that accepts a second argument for imputing NaN values
+existing_df.where(existing_df > 10, 0)

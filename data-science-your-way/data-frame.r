@@ -79,3 +79,39 @@ existing_df["X1992", "Spain"] # names
 
 # Combined vectors and names
 existing_df[c("X1992", "X1998", "X2005"), c("Spain", "United Kingdom")]
+
+# 3. DATA SELECTION
+#    How to select data from dataframes based on their values via logical
+#    expressions
+
+# This returns a matrix variable with boolean values
+existing_df_gt10 <- existing_df > 10
+existing_df_gt10
+
+# When applied to individual columns, the result can be used for indexing
+# like in pandas
+existing_df["United Kingdom"] > 10
+existing_df$Spain[existing_df["United Kingdom"] > 10]
+
+# Use the whole boolean matrix (from before)
+existing_df[existing_df_gt10]
+# NOTE: - the result is a long vector of values
+#       - So, index both dimensions (row/columns separately)
+
+# Use matrix indexing with a data frame to replace elements
+existing_df_2 <- existing_df
+existing_df_2[existing_df_gt10] <- -1
+head(existing_df_2)
+
+# The most expressing way of selecting from a data.frame is by subset()
+# NOTE: subset()
+#       - Applied by row in the data frame
+#       - Can take conditions using column names
+#       - Can take a list of columns
+
+# Example: Select years when the UK had 10+ cases, return rows for UK, Spain
+#          and Colombia
+
+# If a column name contains blanks, we use ` `
+subset(existing_df, `United Kingdom` > 10, c("United Kingdom", "Spain", "Colombia")) # nolint
+# NOTE: the condition uses backticks
