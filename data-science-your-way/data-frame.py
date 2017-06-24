@@ -39,3 +39,34 @@ existing_df.columns.names = ['country']
 
 new_df.index.names = ['year']
 new_df.columns.names = ['country']
+
+# 2. DATA INDEXING
+
+# Accessing each country series
+existing_df['United Kingdom']  # by it's name
+existing_df.Spain  # by key value as an attribute
+
+# Accessing multiple series via pythonlists
+existing_df[['Spain', 'United Kingdom']]
+
+# Accessing individual cells
+existing_df.Spain['1990']  # 44
+
+# Slicing the series using list indexing
+existing_df[['Spain', 'United Kingdom']][0:5]
+
+# Slicing the rows
+existing_df[0:5]
+
+# NOTE: Production code
+#
+# It is recommended to use optimized pandas data access methods exposed below
+
+# .iloc - used positional index access
+existing_df.iloc[0:2]
+
+# .loc - used for label access
+existing_df.loc['1992':'2005']
+
+# Combined to perform series indexing by column
+existing_df.loc[['1992', '1998', '2005'], ['Spain', 'United Kingdom']]
