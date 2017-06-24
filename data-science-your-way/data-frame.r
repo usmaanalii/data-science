@@ -48,3 +48,34 @@ rownames(existing_df) # X1990 X1991 etc...
 
 # colnames are the same as .columns in pandas
 colnames(existing_df)
+
+# 2. DATA INDEXING
+
+# Row number is left blank, so it fetches all rows for the first column
+#
+# NOTE: R has a 1-based indexing schema
+existing_df[, 1]
+
+# Using column names via $ (label accessing within a list)
+existing_df$Afghanistan
+
+# Since a data.frame is a list of elements, we can access columns as list elements via [[]]
+existing_df[[1]]
+
+# NOTE: Unlike Python, R has many ways od foing things, below are recommendations for whcih to use
+
+# Row indexing
+existing_df[1, ] # 1990 data for every country
+
+existing_df[1, 1] # First column for 1990
+existing_df$Afghanistan[1] # Afghanistan column for 1990
+existing_df[[1]][1]
+
+# NOTE: Columns are vectors, the previous examples are accessing the first element of these vectors
+
+# Selecting multiple columns and/or rows by bassing R vectors
+existing_df[c(3, 9, 16), c(170, 194)] # vectors
+existing_df["X1992", "Spain"] # names
+
+# Combined vectors and names
+existing_df[c("X1992", "X1998", "X2005"), c("Spain", "United Kingdom")]
