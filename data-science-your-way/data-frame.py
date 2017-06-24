@@ -2,6 +2,7 @@
 
 import urllib.request
 import pandas as pd
+from __future__ import division
 
 # Downloading the google spreadsheet data as CSV
 tb_deaths_url_csv = 'https://docs.google.com/spreadsheets/d/12uWVH_IlmzJX_75bJ3IH5E-Gqx6-zfbDKNvZqYjUuso/pub?gid=0&output=CSV'  # NOQA
@@ -87,3 +88,31 @@ existing_df[existing_df > 10]  # False values will return NaN
 
 # NOTE: Use of where() that accepts a second argument for imputing NaN values
 existing_df.where(existing_df > 10, 0)
+
+# 3. FUNCTION MAPPING AND DATA GROUPING
+#    Applying functions both, index and element wise
+
+# Total number of TB cases for each country
+existing_df.sum()
+
+# Do the same by year (passing axis=1 to use columns instead of index)
+existing_df.sum(axis=1)
+
+# Methods to apply other fucntions to data frames
+
+# apply and applymap
+existing_df.apply(lambda x: x / 10)  # cases per million (not 100k)
+
+# NOTE: apply works element-wise in this case, producing a data frame
+
+# groupby
+# Get the mean no. cases per year in two periods (before/after 2000)
+mean_cases_by_period = existing_df.groupby(lambda x: int(x) > 1999).mean()
+mean_cases_by_period.index = ['1990-1999', '2000-2007']
+mean_cases_by_period
+
+# NOTE: the lambda function is called on each year (element of .index)
+#       resulting in two groups
+
+# Can be indexed as usual
+mean_cases_by_period[['United Kingdom', 'Spain', 'Colombia']]

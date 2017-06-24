@@ -104,7 +104,7 @@ existing_df_2[existing_df_gt10] <- -1
 head(existing_df_2)
 
 # The most expressing way of selecting from a data.frame is by subset()
-# NOTE: subset()
+# NOTE: subset
 #       - Applied by row in the data frame
 #       - Can take conditions using column names
 #       - Can take a list of columns
@@ -115,3 +115,33 @@ head(existing_df_2)
 # If a column name contains blanks, we use ` `
 subset(existing_df, `United Kingdom` > 10, c("United Kingdom", "Spain", "Colombia")) # nolint
 # NOTE: the condition uses backticks
+
+# 3. FUNCTION MAPPING AND DATA GROUPING
+
+# lapply
+existing_df_sum_countries <- lapply(existing_df, function(x) { sum(x) }) # nolint
+existing_df_sum_countries <- as.data.frame(existing_df_sum_countries)
+existing_df_sum_countries
+
+# NOTE: lapply takes a list and function (applied to each element) returning
+#       a list
+
+# sum by year, for every country
+existing_df_sum_years <- lapply(existing_df_transposed, function(x) { sum(x) }) # nolint
+existing_df_sum_years <- as.data.frame(existing_df_sum_years)
+existing_df_sum_years
+
+# aggregate
+
+# 1. Define a grouping vector
+before_2000 <- c("1990-99", "1990-99", "1990-99", "1990-99", "1990-99", "1990-99", "1990-99", "1990-99", "1990-99", "1990-99", "2000-07", "2000-07", "2000-07", "2000-07", "2000-07", "2000-07", "2000-07", "2000-07") # nolint
+before_2000
+
+# 2. Use that column as a grouping element ans use the mean function
+mean_cases_by_period <- aggregate(existing_df, list(Period = before_2000), mean)
+mean_cases_by_period
+
+# NOTE: allows subsetting the dataframe, passing grouping elements and functions
+
+# Can be indexed as usual
+mean_cases_by_period[, c("United Kingdom", "Spain", "Colombia")]
