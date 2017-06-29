@@ -37,3 +37,24 @@ existing_summary[, 1]
 
 # which() - Used to access by column name
 data.frame(Spain = existing_summary[,which(colnames(existing_df)=='Spain')], UK = existing_summary[,which(colnames(existing_df)=='United Kingdom')]) # nolint
+
+# 4. PLOTTING
+#    Many data types have cusotm plot() methods
+
+# Basic line chart
+uk_series <- existing_df_[, c("United Kingdom")]
+spain_series <- existing_df[, c("Spain")]
+colombia_series <- existing_df[, c("Colombia")]
+
+uk_series
+
+xrange <- 1990:2007
+
+plot(xrange, uk_series, type = "1", xlab = "Year", ylab = "Existing cases per 100k", col = "blue", ylim = c(0, 100)) # nolint
+lines(xrange, spain_series, col = "darkgreen")
+lines(xrange, uk_series, col = "red")
+legend(x = 2003, y = 100, lty = 1, col = c("blue", "darkgreen", "red"), legend = c("UK", "Spain", "Colombia")) # nolint
+
+boxplot(uk_series, spain_series, colombia_series, names = c("UK", "Spain", "Colombia"), xlab = "Year", ylab = "Existing cases per 100K") # nolint
+
+lapply(existing_df, class)
