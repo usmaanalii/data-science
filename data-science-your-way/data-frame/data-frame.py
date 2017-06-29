@@ -1,8 +1,9 @@
 # 1. DOWNLOADING FILES AND READING CSV  # NOQA
 
+from __future__ import division
 import urllib.request
 import pandas as pd
-from __future__ import division
+
 
 # Downloading the google spreadsheet data as CSV
 tb_deaths_url_csv = 'https://docs.google.com/spreadsheets/d/12uWVH_IlmzJX_75bJ3IH5E-Gqx6-zfbDKNvZqYjUuso/pub?gid=0&output=CSV'  # NOQA
