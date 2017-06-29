@@ -167,3 +167,8 @@ two_world_df.plot(title="Estimated new TB cases per 100K", figsize=(12, 8))
 
 # Exact numbers
 two_world_df.pct_change().plot(title="Percentage change in estimated new TB cases", figsize=(12, 8))  # NOQA
+
+# Googling about events and dates in TB
+existing_df.China.plot(title="Estimated existing TB cases in China")
+
+new_df.apply(pd.Series.argmax, axis=1)['2007']
