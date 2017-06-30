@@ -1,5 +1,4 @@
 # 1. DOWNLOADING FILES AND READING CSV
-
 install.packages("RCurl")
 install.packages("lintr")
 

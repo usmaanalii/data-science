@@ -1,12 +1,14 @@
-# 1. DOWNLOADING FILES AND READING CSV  # NOQA
+# pylint: disable=line-too-long
+
+# 1. DOWNLOADING FILES AND READING CSV
 import pandas as pd
 import urllib.request
 %matplotlib inline
 
 # Downloading the google spreadsheet data as CSV
-tb_deaths_url_csv = 'https://docs.google.com/spreadsheets/d/12uWVH_IlmzJX_75bJ3IH5E-Gqx6-zfbDKNvZqYjUuso/pub?gid=0&output=CSV'  # NOQA
-tb_existing_url_csv = 'https://docs.google.com/spreadsheets/d/1X5Jp7Q8pTs3KLJ5JBWKhncVACGsg5v4xu6badNs4C7I/pub?gid=0&output=csv'  # NOQA
-tb_new_url_csv = 'https://docs.google.com/spreadsheets/d/1Pl51PcEGlO9Hp4Uh0x2_QM0xVb53p2UDBMPwcnSjFTk/pub?gid=0&output=csv'  # NOQA
+tb_deaths_url_csv = 'https://docs.google.com/spreadsheets/d/12uWVH_IlmzJX_75bJ3IH5E-Gqx6-zfbDKNvZqYjUuso/pub?gid=0&output=CSV'
+tb_existing_url_csv = 'https://docs.google.com/spreadsheets/d/1X5Jp7Q8pTs3KLJ5JBWKhncVACGsg5v4xu6badNs4C7I/pub?gid=0&output=csv'
+tb_new_url_csv = 'https://docs.google.com/spreadsheets/d/1Pl51PcEGlO9Hp4Uh0x2_QM0xVb53p2UDBMPwcnSjFTk/pub?gid=0&output=csv'
 
 # csv file names
 local_tb_deaths_file = 'all_deaths.csv'
@@ -80,9 +82,9 @@ new_total_per_year_df = new_df.sum(axis=1)
 
 # 2. Create a new DataFrame, with each sum in a series
 #    Plot this DataFrame
-world_trends_df = pd.DataFrame({'Total deaths per 100K': deaths_total_per_year_df, 'Total existing cases per 100K': existing_total_per_year_df, 'Total new cases per 100k': new_total_per_year_df}, index=deaths_total_per_year_df.index)  # NOQA
+world_trends_df = pd.DataFrame({'Total deaths per 100K': deaths_total_per_year_df, 'Total existing cases per 100K': existing_total_per_year_df, 'Total new cases per 100k': new_total_per_year_df}, index=deaths_total_per_year_df.index)
 
-world_trends_df.plot(figsize=(6, 3)).legend(loc="center left", bbox_to_anchor=(1, 0.5))  # NOQA
+world_trends_df.plot(figsize=(6, 3)).legend(loc="center left", bbox_to_anchor=(1, 0.5))
 
 # Counteies out of tendency
 
@@ -129,8 +131,8 @@ existing_super_outlier = existing_by_country_mean_summary['50%'] * 5
 new_super_outlier = new_by_country_mean_summary['50%'] * 5
 
 # Yse these values to get countries beyond these levels
-super_outlier_countries_by_deaths_index = deaths_by_country_mean > deaths_super_outlier  # NOQA
-super_outlier_countries_by_existing_index = existing_by_country_mean > existing_super_outlier  # NOQA
+super_outlier_countries_by_deaths_index = deaths_by_country_mean > deaths_super_outlier
+super_outlier_countries_by_existing_index = existing_by_country_mean > existing_super_outlier
 super_outlier_countries_by_new_index = new_by_country_mean > new_super_outlier
 
 sum(super_outlier_countries_by_deaths_index) / num_countries
@@ -141,13 +143,13 @@ sum(super_outlier_countries_by_new_index) / num_countries
 
 # Get the dataframes
 # use indices to filter out original data frames
-super_outlier_deaths_df = deaths_df.T[super_outlier_countries_by_deaths_index].T  # NOQA
-super_outlier_existing_df = existing_df.T[super_outlier_countries_by_existing_index].T  # NOQA
-super_outlier_new_df = new_df.T[super_outlier_countries_by_new_index].T  # NOQA
+super_outlier_deaths_df = deaths_df.T[super_outlier_countries_by_deaths_index].T
+super_outlier_existing_df = existing_df.T[super_outlier_countries_by_existing_index].T
+super_outlier_new_df = new_df.T[super_outlier_countries_by_new_index].T
 
 super_outlier_new_df
 # Plots
-super_outlier_new_df.plot(figsize=(12, 4)).legend(loc='center left', bbox_to_anchor=(1, 0.5))  # NOQA
+super_outlier_new_df.plot(figsize=(12, 4)).legend(loc='center left', bbox_to_anchor=(1, 0.5))
 
 # We have 22 countries where the number of new cases exceed 5x the average
 # Let's make a country that represents the average of these
@@ -155,18 +157,18 @@ average_super_outlier_country = super_outlier_new_df.mean(axis=1)
 average_super_outlier_country
 
 # create a country that represents the rest of the world
-average_better_world_country = new_df.T[ - super_outlier_countries_by_new_index].T.mean(axis=1)  # NOQA
+average_better_world_country = new_df.T[ - super_outlier_countries_by_new_index].T.mean(axis=1)
 average_better_world_country
 
 # plot this country with the average world country
-two_world_df = pd.DataFrame({'Average Better World Country': average_better_world_country, 'Average Outlier Country': average_super_outlier_country}, index=new_df.index)  # NOQA
+two_world_df = pd.DataFrame({'Average Better World Country': average_better_world_country, 'Average Outlier Country': average_super_outlier_country}, index=new_df.index)
 
 two_world_df.plot(title="Estimated new TB cases per 100K", figsize=(12, 8))
 
 # The increase in new cases is very strong in outliers
 
 # Exact numbers
-two_world_df.pct_change().plot(title="Percentage change in estimated new TB cases", figsize=(12, 8))  # NOQA
+two_world_df.pct_change().plot(title="Percentage change in estimated new TB cases", figsize=(12, 8))
 
 # Googling about events and dates in TB
 existing_df.China.plot(title="Estimated existing TB cases in China")

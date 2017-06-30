@@ -1,0 +1,4 @@
+exclusions: list("dimensionality-reduction-and-clustering/dimensionality-reduction-and-clustering.r" = 1, "dimensionality-reduction-and-clustering/dimensionality-reduction-and-clustering.r", "dimensionality-reduction-and-clustering/dimensionality-reduction-and-clustering.r")
+
+exclude_start: "# Begin Exclude Linting"
+exclude_end: "# End Exclude Linting"
