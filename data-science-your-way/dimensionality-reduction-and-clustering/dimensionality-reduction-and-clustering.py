@@ -19,8 +19,10 @@
 # 1. DOWNLOADING FILES AND READING CSV
 import urllib.request
 import pandas as pd
+import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import normalize
+from sklearn.cluster import KMeans
 %matplotlib inline
 
 # Downloading the google spreadsheet data as CSV
@@ -111,7 +113,7 @@ existing_df_2d['country_change_scaled'] = pd.Series(country_change_scaled, index
 
 existing_df_2d.plot(kind="scatter", x="PC2", y="PC1", s=existing_df_2d['country_change_scaled'] * 100, figsize=(16, 8))  # NOQA
 
-# 3. PCA Results
+# PCA Results
 
 # Most variation happens along the y axis assigned to PC1/
 # At the top of the charts, a concentration of developed countries exist,
@@ -121,3 +123,14 @@ existing_df_2d.plot(kind="scatter", x="PC2", y="PC1", s=existing_df_2d['country_
 #
 # PC2 - Is laregely affected by change over time (color gradient changed
 # across x axis for time change data)
+
+# 3. EXPLORING DATA STRUCTURE WITH K MEANS CLUSTERING
+kmeans = KMeans(n_clusters=5)
+clusters = kmeans.fit(existing_df)
+
+# Store the cluster assignments together with each country
+# in our data frame. Labels are returned in clusters.labels_
+existing_df_2d['cluster'] = pd.Series(clusters.labels_, index=existing_df_2d.index)  # NOQA
+
+# Plot, using cluster column as color
+existing_df_2d.plot(kind="scatter", x="PC2", y="PC1", c=existing_df_2d.cluster.astype(np.float), figsize=(16, 8))   # NOQA
