@@ -1,0 +1,7 @@
+{
+	"version": "0.1.0",
+	"command": "/Users/usmaanali/.virtualenvs/test-env/bin/python",
+	"isShellCommand": true,
+	"showOutput": "always",
+	"args": ["${file}"]
+}

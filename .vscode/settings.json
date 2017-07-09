@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/Users/usmaanali/.virtualenvs/test-env/bin/python3.6",
+    // List of paths to libraries and the like that need to be imported by auto complete engine. E.g. when using Google App SDK, the paths are not in system path, hence need to be added into this list.
+    "python.autoComplete.extraPaths": [
+        "/Users/usmaanali/.virtualenvs/test-env/lib/python3.6",
+        "/Users/usmaanali/.virtualenvs/test-env/lib/python3.6/site-packages"
+    ]
+}
