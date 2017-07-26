@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # * Basics
+=======
+argu# * Basics
+>>>>>>> c9bdb184b31390b649171414ee0a9f3f3a7743f5
 from functools import partial, reduce
 
 # ** Whitespace Formatting
