@@ -1,7 +1,7 @@
 #  ** Bar Charts
 from matplotlib import pyplot as plt
 from collections import Counter
-
+%matplotlib inline
 #   - Good for showing how some quantity varies amongst some discrete set
 #   of items
 movies = ["Annie Hall", "Ben-Hur", "Casablanca", "Gandhi", "West Side Story"]
