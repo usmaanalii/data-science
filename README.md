@@ -1,9 +1,11 @@
-## data-science
+# data-science
 
-This is a list of resources that I will be using to learn about data science
+This is a list of resources that I have used to learn about data science
 
 ### Contents
 
+- [Python for Data Analysis](http://shop.oreilly.com/product/0636920023784.do)
+- [Data Science From Scratch](https://renaissanceperiodization.com/hypertrophy-training-guide-central-hub/)
 - [Data Science Your Way](https://github.com/jadianes/data-science-your-way)
 
 ### Notes
